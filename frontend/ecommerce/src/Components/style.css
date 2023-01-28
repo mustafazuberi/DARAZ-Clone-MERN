@@ -1,0 +1,27 @@
+.sec1 {
+    width: 100%;
+    background-color: #ececec;
+    color: rgb(63, 62, 62);
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.sec1 div {
+    padding-right: 50px;
+}
+
+.sec1 div span:hover {
+    text-decoration: underline;
+    color: #f85606;
+    transition: 0.2s;
+}
+@media only screen and (max-width:340px) {
+    .sec1 div {
+        padding-right: 30px;
+    }
+}
