@@ -1,6 +1,8 @@
 import React from 'react'
 
-import Home from '../pages/Home';
+import Home from '../pages/Home/index';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -14,6 +16,14 @@ const Router = () => {
         {
             path: "/",
             element: <Home />,
+        },
+        {
+            path: "/login",
+            element: <Login />,
+        },
+        {
+            path: "/signup",
+            element: <Signup />,
         },
     ]);
 

@@ -20,8 +20,179 @@
     color: #f85606;
     transition: 0.2s;
 }
+
 @media only screen and (max-width:340px) {
     .sec1 div {
         padding-right: 30px;
     }
 }
+
+
+/* sec2 */
+.darazLogo {
+    width: 150px;
+    height: 45px;
+}
+
+.searchInp input {
+    padding: 15px;
+    border: none;
+    outline: none;
+    background-color: #ececec;
+    font-size: 14px;
+
+}
+
+.searchInp input::placeholder {
+    color: rgb(172, 172, 172);
+    font-size: 14px;
+}
+
+.searchIcon {
+    padding: 9px;
+    padding-left: 11px;
+    padding-right: 11px;
+    background-color: #f85606;
+}
+
+.wSearch {
+    display: flex;
+}
+
+.searchInp {
+    width: 95%;
+}
+
+.searchInp input {
+    width: 100%;
+}
+
+.searchBar {
+    width: 60%;
+}
+
+.navbarDownloadImage {
+    width: 200px;
+    height: 50px;
+}
+
+.sec2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.cart {
+    padding: 10px 15px 10px 15px;
+}
+
+@media only screen and (max-width: 1050px) {
+    .searchBar {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .searchBar {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .download {
+        display: none;
+    }
+
+    .searchBar {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    .logo {
+        display: none;
+    }
+
+    .searchBar {
+        width: 80%;
+        padding-left: 20px;
+    }
+
+}
+
+.f1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #2e2e54;
+    color: white;
+}
+
+.f1 ul {
+    list-style-type: none;
+    font-size: 13px;
+    justify-content: left;
+}
+
+.qrTop {
+    display: flex;
+    flex-direction: row;
+}
+
+.qr img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.shopping img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.qr,
+.shopping {
+    padding: 10px 10px 10px 10px;
+}
+
+.shopping h4 {
+    font-size: 16px;
+}
+
+.shopping {
+    margin-top: 16px;
+}
+
+.f1 {
+    list-style-type: none;
+    font-size: 13px;
+    flex-wrap: wrap;
+
+}
+
+.qrBottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.qrBottom div {
+    padding: 0px 10px 0px 10px;
+}
+
+.appGallery {
+    width: 60px;
+    height: 100px;
+}
+
+.happHead {
+    color: #f85606;
+}
+
+.qr div{
+    padding-left: 20px;
+}
+
