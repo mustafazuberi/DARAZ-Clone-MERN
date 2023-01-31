@@ -9,7 +9,7 @@ const { stringToHash, varifyHash } = require('bcrypt-inzi')
 const cors = require('cors')
 
 const app = express()
-const SECRET = process.env.SECRET || "topsecret"    
+const SECRET = process.env.SECRET || "topsecret"
 
 
 
@@ -59,7 +59,7 @@ app.post('/signup', (req, res) => {
             // converitng in hash using bcrypt-inzi library
             stringToHash(body.password).then(hashString => {
                 userModel.create({
-                    firstName: body.fullName,
+                    fullName: body.fullName,
                     email: body.email.toLowerCase(),
                     password: hashString,
                     DOB: body.DOB
@@ -88,7 +88,7 @@ app.post('/login', (req, res) => {
         res.status(400).send(
             `required fields missing, request example: 
                 {
-                    "email": "abc@abc.com",
+                    "email": "abc@gmail.com",
                     "password": "12345"
                 }`
         );
@@ -100,7 +100,7 @@ app.post('/login', (req, res) => {
         { email: body.email },
         // { email: 1, firstName: 1, lastName: 1, password: 1 },
         // "email -password",
-        "email firstName lastName password",
+        "email fullName DOB _id password",
         (err, data) => {
             if (!err) {
                 // console.log("data: ", data);
@@ -130,8 +130,8 @@ app.post('/login', (req, res) => {
                                 message: "login successful",
                                 profile: {
                                     email: data.email,
-                                    firstName: data.firstName,
-                                    lastName: data.lastName,
+                                    fullName: data.fullName,
+                                    DOB: data.DOB,
                                     _id: data._id
                                 }
                             });
@@ -163,6 +163,16 @@ app.post('/login', (req, res) => {
 
 
 
+
+app.post("/logout", (req, res) => {
+
+    res.cookie('Token', '', {
+        maxAge: 0,
+        httpOnly: true
+    });
+
+    res.send({ message: "You have successfully logged out." });
+})
 
 
 

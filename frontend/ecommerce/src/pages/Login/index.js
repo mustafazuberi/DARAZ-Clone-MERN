@@ -8,10 +8,23 @@ import { TextField } from '@mui/material'
 import axios from 'axios'
 import Swal from 'sweetalert2';
 
+
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreators from "./../../store/index"
+
+
+
+
+
+
 const baseUrl = "http://localhost:4000"
 
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { authData,isAuthenticated } = bindActionCreators(actionCreators, dispatch)
+
 
     const login = async (e) => {
         e.preventDefault()
@@ -22,6 +35,8 @@ const Login = () => {
                 email: email,
                 password: password,
             })
+            authData(response.data.profile)
+            isAuthenticated(true)   
             await Swal.fire({
                 title: ` Successfully logged in.`,
                 width: 600,

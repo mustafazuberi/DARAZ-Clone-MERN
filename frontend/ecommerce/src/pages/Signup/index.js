@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 
 
 const baseUrl = "http://localhost:4000"
+
 const Signup = () => {
     const navigate = useNavigate()
 
