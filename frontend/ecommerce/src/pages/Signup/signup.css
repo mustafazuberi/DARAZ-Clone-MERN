@@ -1,6 +1,6 @@
 .mainSignupDiv {
     width: 100%;
-    height: 80vh !important;
+    /* height: 90vh !important; */
     margin-top: 50px;
     background-color: #ececec;
 }
@@ -19,14 +19,13 @@
     color: #424242;
 }
 
-.loginFormDiv {
+.signupFormDiv {
     width: 100%;
-    height: auto;
     background-color: white;
     padding: 20px 0px 50px 0px;
 }
 
-.loginFormInp {
+.signupFormInp {
     margin-top: 30px;
 }
 
@@ -47,7 +46,7 @@
     transition: 0.5s;
 }
 
-.loginForm {
+.signupForm {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -79,7 +78,7 @@
 }
 
 @media only screen and (max-width: 680px) {
-    .loginForm {
+    .signupForm {
         display: flex;
         flex-direction: column;
     }
@@ -90,20 +89,10 @@
         margin: 0 auto;
     }
 
-
-    .login {
-        width: 80%;
-    }
-}
-
-@media only screen and (max-width: 680px) {
     .login {
         width: 90%;
     }
 
-    .mainSignupDiv {
-        height: 110vh !important;
-    }
 
     .loginBtn,
     .signupBtn {
@@ -111,7 +100,8 @@
     }
 }
 
-.loginFormInpBtnSide {
+
+.signupFormInpBtnSide {
     margin-top: 8px;
     margin-bottom: 20px;
 }

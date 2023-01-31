@@ -103,14 +103,7 @@
 
 .mainLoginDiv {
     width: 100%;
-    height: 60vh !important;
     margin-top: 50px;
     background-color: #ececec;
 }
 
-@media only screen and (max-width: 680px) {
-
-    .mainLoginDiv {
-        height: 75vh !important;
-    }
-}

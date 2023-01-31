@@ -79,7 +79,7 @@ const Signup = () => {
 
 
 
-    
+
     return (
         <div>
             <Navbar />
@@ -89,17 +89,17 @@ const Signup = () => {
                     <div className="welcome">
                         <h1>Create your Daraz Account.</h1>
                     </div>
-                    <div className="loginFormDiv">
+                    <div className="signupFormDiv">
                         <form method='POST' onSubmit={signup}>
-                            <div className="loginForm">
+                            <div className="signupForm">
                                 <div className="inpsSide">
-                                    <div className="loginFormInp">
+                                    <div className="signupFormInp">
                                         <TextField id="email" label="Email" placeholder='Please enter your email' variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
-                                    <div className="loginFormInp">
+                                    <div className="signupFormInp">
                                         <TextField id="psw" label="Password" placeholder='Minimum 6 characteters with a number and a letter' variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
-                                    <div className="loginFormInp">
+                                    <div className="signupFormInp">
                                         <TextField
                                             id="DOB"
                                             label="Birthday"
@@ -114,7 +114,7 @@ const Signup = () => {
                                     </div>
                                 </div>
                                 <div className="btnsSide">
-                                    <div className="loginFormInpBtnSide">
+                                    <div className="signupFormInpBtnSide">
                                         <TextField id="fullName" label="Fullname" placeholder='Enter your first and last name' variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
                                     <button type="submit" className='loginBtn' >Signup</button><br /><br />

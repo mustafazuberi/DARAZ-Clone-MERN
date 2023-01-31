@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
-import "./style.css"
+import "./login.css"
 
 import { useNavigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
