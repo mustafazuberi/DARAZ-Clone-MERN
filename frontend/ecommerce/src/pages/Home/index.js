@@ -1,12 +1,16 @@
 import React from 'react'
 import Navbar from '../../Components/Navbar'
+import Footer from '../../Components/Footer'
+import "./style.css"
 const Home = () => {
     return (
 
-        <div>
-            <Navbar/>
-            <h1>THIs is Home Page Products</h1>
-        </div>
+        <>
+            <Navbar />
+            <div className="bgDiv"></div>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <Footer />
+        </>
     )
 }
 

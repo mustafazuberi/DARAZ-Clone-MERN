@@ -1,0 +1,54 @@
+.sellHeading {
+    width: 100%;
+    padding: 20px;
+    background-color: #f85606;
+    margin-top: 20px;
+}
+
+.sellHeading h1 {
+    color: white;
+    text-align: center;
+    font-weight: 900;
+}
+
+
+
+/* Form */
+.mainSellOnDarazPage {
+    background-color: #ececec;
+    padding: 50px 0px 50px 0px;
+}
+
+.mainSellOnDarazFormDiv {
+    background-color: white;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+/* insode */
+.sellFormInp {
+    width: 100%;
+    margin: 0 auto;
+    padding: 35px 40px 5px 40px;
+}
+
+.createStore {
+    background-color: #f85606;
+    border: none;
+    outline: none;
+    color: white;
+    /* width: 93%; */
+    padding: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+.createStore:hover {
+    background-color: #d35a1e;
+    transition: 0.3s;
+}
