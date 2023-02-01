@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 import "./signup.css"
@@ -19,6 +19,10 @@ const baseUrl = "http://localhost:4000"
 
 const Signup = () => {
     const navigate = useNavigate()
+
+
+
+
 
     const signup = async (e) => {
         e.preventDefault()
@@ -98,7 +102,7 @@ const Signup = () => {
                                         <TextField id="email" label="Email" placeholder='Please enter your email' variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
                                     <div className="signupFormInp">
-                                        <TextField id="psw" label="Password" placeholder='Minimum 6 characteters with a number and a letter' variant="filled" size='small' style={{ width: "100%" }} />
+                                        <TextField id="psw" type={'password'} label="Password" placeholder='Minimum 6 characteters with a number and a letter' variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
                                     <div className="signupFormInp">
                                         <TextField

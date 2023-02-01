@@ -23,20 +23,21 @@ const baseUrl = "http://localhost:4000"
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData,isAuthenticated } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticated } = bindActionCreators(actionCreators, dispatch)
 
 
     const login = async (e) => {
         e.preventDefault()
+        const email = document.getElementById("loginEmail").value
+        const password = document.getElementById("password").value
         try {
-            const email = document.getElementById("loginEmail").value
-            const password = document.getElementById("password").value
+
             let response = await axios.post(`${baseUrl}/login`, {
                 email: email,
                 password: password,
             })
             authData(response.data.profile)
-            isAuthenticated(true)   
+            isAuthenticated(true)
             await Swal.fire({
                 title: ` Successfully logged in.`,
                 width: 600,
@@ -50,14 +51,18 @@ const Login = () => {
                   no-repeat
                 `
             })
-            navigate('/')
+            console.log(response)
+            navigate(response.data.whereToNavigate)
         } catch (e) {
-            Swal.fire({
+            let response = await axios.post(`${baseUrl}/login`, {
+                email: email,
+                password: password,
+            })
+            await Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: e.response.data.message,
+                text: response.data.message,
             })
-            console.log("e: ", e)
         }
     }
 
@@ -80,7 +85,7 @@ const Login = () => {
                                         <TextField id="loginEmail" name='email' label="Email" variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
                                     <div className="loginFormInp">
-                                        <TextField id="password" name='password' label="Password" variant="filled" size='small' style={{ width: "100%" }} />
+                                        <TextField id="password" name='password' type={'password'} label="Password" variant="filled" size='small' style={{ width: "100%" }} />
                                     </div>
                                 </div>
                                 <div className="btnsSide">

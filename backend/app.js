@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const userModel = require('./models/userSchema')
+const sellerModel = require('./models/sellerSchema')
 
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser')
@@ -15,6 +16,15 @@ const SECRET = process.env.SECRET || "topsecret"
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
+
+
+
+// for base64
+app.use(bodyParser.urlencoded({ limit: '50mb' }))
+app.use(express.json({ limit: '50mb' }))
+//////////////////////////////////////////////////////
+
+
 app.use(bodyParser.json());
 const corsOptions = {
     origin: 'http://localhost:3000',
@@ -81,6 +91,22 @@ app.post('/signup', (req, res) => {
 })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post('/login', (req, res) => {
     let body = req.body;
 
@@ -98,13 +124,10 @@ app.post('/login', (req, res) => {
     // check if user already exist // query email user
     userModel.findOne(
         { email: body.email },
-        // { email: 1, firstName: 1, lastName: 1, password: 1 },
-        // "email -password",
         "email fullName DOB _id password",
         (err, data) => {
             if (!err) {
                 // console.log("data: ", data);
-
                 if (data) { // user found
                     varifyHash(body.password, data.password).then(isMatched => {
 
@@ -133,31 +156,101 @@ app.post('/login', (req, res) => {
                                     fullName: data.fullName,
                                     DOB: data.DOB,
                                     _id: data._id
-                                }
+                                },
+                                whereToNavigate: "/"
                             });
-                            return;
-                        } else {
-                            // console.log("password did'nt match");
-                            res.status(401).send({ message: "Incorrect email or password" });
                             return;
                         }
                     })
 
-                } else { // user not already exist
-                    // console.log("user not found");/
-                    res.status(401).send({ message: "Incorrect email or password" });
-                    return;
+
+                } else if (!data) {
+                    sellerModel.findOne(
+                        { email: body.email },
+                        "email fullName _id password",
+                        (err, data) => {
+                            if (!err) {
+                                if (data) { // user found
+                                    varifyHash(body.password, data.password).then(isMatched => {
+                                        if (isMatched) {
+                                            const token = jwt.sign({
+                                                _id: data._id,
+                                                email: data.email,
+                                                iat: Math.floor(Date.now() / 1000) - 30,
+                                                exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+                                            }, SECRET);
+                                            res.cookie('Token', token, {
+                                                maxAge: 86_400_000,
+                                                httpOnly: true
+                                            });
+
+                                            res.send({
+                                                message: "login successful",
+                                                profile: {
+                                                    email: data.email,
+                                                    fullName: data.fullName,
+                                                    _id: data._id,
+                                                    phoneNumber: data.phoneNumber,
+                                                    shopName: data.shopName,
+                                                    country: data.country,
+                                                    city: data.city,
+                                                    productCategory: data.productCategory,
+                                                    paymentMethod: data.paymentMethod,
+                                                    shopImageUrl: data.shopImageUrl
+
+                                                },
+                                                whereToNavigate: "/sellerHome"
+                                            });
+                                            return;
+                                        }else{
+                                            res.send({message:"Invalid email or password."})
+                                        }
+                                    })
+                                }
+                            } else {
+                                res.status(500).send({ message: "login failed, please try later" });
+                                return;
+                            }
+                        })
                 }
+
+
+
+
+
+
+
+
             } else {
                 // console.log("db error: ", err);
                 res.status(500).send({ message: "login failed, please try later" });
                 return;
             }
+
+
+
         })
 
 
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -177,7 +270,63 @@ app.post("/logout", (req, res) => {
 
 
 
+app.post('/signupAsSeller', (req, res) => {
+    let body = req.body;
+    req.body.email = req.body.email.toLowerCase()
+    // checking in users collection 
+    userModel.findOne({ email: body.email }, (err, user) => {
+        if (err) {
+            res.status(500).send({ message: "db error in query" });
+            return;
+        }
+        if (user) {
+            res.status(400).send({ message: "Sorry, user already exist, please try a different email." });
+            return;
+        }
 
+        // Now checking in resturants collection if already exists
+        sellerModel.findOne({ email: body.email }, (err, user) => {
+            if (err) {
+                res.status(500).send({ message: "db error in query" });
+                return;
+            }
+            if (user) {
+                res.send({ message: "Sorry, user already exist, please try a different email." });
+                return;
+            } else {
+                // converitng in hash using bcrypt-inzi library
+                stringToHash(body.password).then(hashString => {
+                    sellerModel.create({
+                        fullName: body.fullName,
+                        email: body.email.toLowerCase(),
+                        password: hashString,
+                        phoneNumber: body.phoneNumber,
+                        shopName: body.shopName,
+                        city: body.city,
+                        country: body.country,
+                        productCategory: body.productCategory,
+                        paymentMethod: body.paymentMethod,
+                        shopImageUrl: body.shopImageUrl
+                    },
+                        (err, result) => {
+                            if (!err) {
+                                // console.log("data saved: ", result);
+                                res.status(201).send({ message: "Resturant Registered Successfully" });
+                            } else {
+                                // console.log("db error: ", err);
+                                res.status(500).send({ message: "internal server error" });
+                            }
+                        });
+                })
+            }
+        })
+
+
+
+    })
+
+
+})
 
 
 
@@ -185,6 +334,38 @@ app.post("/logout", (req, res) => {
 app.get('/', (req, res) => {
     res.send('this is / page')
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
