@@ -2,7 +2,7 @@ export const authData = (authInfo) => {
     return (dispatch) => {
         dispatch({
             type: 'jwtAuth',
-            payLoad : authInfo
+            payLoad: authInfo
         })
     }
 }
@@ -18,3 +18,33 @@ export const isAuthenticated = (isLoggined) => {
         })
     }
 }
+
+
+
+
+export const isSeller = (isSeller) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'isSeller',
+            payLoad: isSeller
+        })
+    }
+}
+
+
+
+
+
+export const sellerAuth = (sellerAuth) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'sellerAuth',
+            payLoad: sellerAuth
+        })
+    }
+}
+
+
+
+
+

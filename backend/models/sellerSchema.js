@@ -11,6 +11,7 @@ const sellerSchema = new mongoose.Schema({
     productCategory: { type: String, required: true },
     paymentMethod: { type: String, required: true },
     shopImageUrl: { type: String, required: true },
+    products: { type: Array },
     createdOn: { type: Date, default: Date.now },
 });
 const sellerModel = mongoose.model('Sellers', sellerSchema);

@@ -1,0 +1,106 @@
+.overviewProfile {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.overviewDiv {
+    width: 220px;
+    height: 130px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.orders {
+    background-color: darkcyan;
+    color: white;
+}
+
+.followers {
+    background-color: rgba(218, 169, 8, 0.815);
+    color: white;
+}
+
+.products {
+    background-color: purple;
+    color: white;
+}
+
+.overviewDiv span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.overviewDiv h4 {
+    font-size: 35px;
+    font-weight: 900;
+}
+
+
+/* Latest  */
+.latest {
+    width: 90%;
+    margin: 50px auto;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
+.heading h4 {
+    font-weight: 300;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.headingsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.latestOrders,
+.latestproducts {
+    width: 40%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+@media only screen and (max-width:1000px) {
+
+    .latestOrders,
+    .latestproducts {
+        width: 46%;
+    }
+}
+
+@media only screen and (max-width:900px) {
+
+    .latestOrders,
+    .latestproducts {
+        width: 49%;
+    }
+}
+
+@media only screen and (max-width:800px) {
+
+    .latestOrders,
+    .latestproducts {
+        width: 100%;
+    }
+
+    .latest {
+        flex-direction: column;
+    }
+}

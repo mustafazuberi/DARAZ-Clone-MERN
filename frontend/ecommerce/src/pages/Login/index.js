@@ -23,7 +23,7 @@ const baseUrl = "http://localhost:4000"
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { authData, isAuthenticated } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticated, sellerAuth, isSeller } = bindActionCreators(actionCreators, dispatch)
 
 
     const login = async (e) => {
@@ -36,8 +36,10 @@ const Login = () => {
                 email: email,
                 password: password,
             })
-            authData(response.data.profile)
+            // authData(response.data.profile)
             isAuthenticated(true)
+            response.data.whereToNavigate === '/sellerHome' ? isSeller(true) : isSeller(false)
+            response.data.whereToNavigate === '/sellerHome' ? sellerAuth(response.data.profile) : authData(response.data.profile)
             await Swal.fire({
                 title: ` Successfully logged in.`,
                 width: 600,

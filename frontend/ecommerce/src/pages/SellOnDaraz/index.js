@@ -89,7 +89,7 @@ const SellOnDaraz = () => {
             return
         }
         try {
-           
+
             let response = await axios.post(`${baseUrl}/signupAsSeller`, {
                 fullName: fullName,
                 email: email,

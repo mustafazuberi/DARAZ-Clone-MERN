@@ -192,7 +192,91 @@
     color: #f85606;
 }
 
-.qr div{
+.qr div {
     padding-left: 20px;
 }
 
+
+
+
+/* Seller Navbar */
+.hamburgerIcon {
+    background-color: #f85606;
+    padding: 10px;
+    margin: 30px 10px 30px 60px;
+    color: white;
+    border-radius: 8px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.profileIconDiv {
+    margin-right: 40px;
+}
+
+.profileIconDiv img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.headingPortal h1 {
+    font-family: monospace;
+    border-bottom: 6px solid #f85606;
+}
+
+.sellerHomeLinks div {
+    padding: 10px;
+    /* font-weight: 300; */
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sellerHomeLinks div:hover {
+    color: #f85606;
+    background-color: #ececec;
+    transition: 0.3s;
+}
+
+.profileIconDiv {
+    display: flex;
+    flex-direction: row;
+
+}
+
+@media only screen and (max-width:914px) {
+    .headingPortal h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width:830px) {
+    .headingPortal h1 {
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width:770px) {
+    .headingPortal h1 {
+        font-size: 26px;
+    }
+
+    .hamburgerIcon {
+        margin: 30px 10px 30px 20px;
+    }
+}
+
+@media only screen and (max-width:720px) {
+    .headingPortal {
+        display: none;
+    }
+
+    .hamburgerIcon {
+        margin: 30px 10px 30px 30px;
+    }
+}

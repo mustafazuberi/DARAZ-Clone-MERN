@@ -2,12 +2,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const userModel = require('./models/userSchema')
 const sellerModel = require('./models/sellerSchema')
+const addProductModel = require('./models/addProductSchema')
 
 const jwt = require('jsonwebtoken');
+const ObjectId = require('mongodb').ObjectId;
+
+
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const { stringToHash, varifyHash } = require('bcrypt-inzi')
 const cors = require('cors')
+const { db } = require('./models/addProductSchema')
 
 const app = express()
 const SECRET = process.env.SECRET || "topsecret"
@@ -167,7 +172,7 @@ app.post('/login', (req, res) => {
                 } else if (!data) {
                     sellerModel.findOne(
                         { email: body.email },
-                        "email fullName _id password",
+                        "email fullName _id password phoneNumber shopName city country productCategory paymentMethod shopImageUrl",
                         (err, data) => {
                             if (!err) {
                                 if (data) { // user found
@@ -202,8 +207,8 @@ app.post('/login', (req, res) => {
                                                 whereToNavigate: "/sellerHome"
                                             });
                                             return;
-                                        }else{
-                                            res.send({message:"Invalid email or password."})
+                                        } else {
+                                            res.send({ message: "Invalid email or password." })
                                         }
                                     })
                                 }
@@ -327,6 +332,53 @@ app.post('/signupAsSeller', (req, res) => {
 
 
 })
+
+
+
+
+
+
+
+
+
+
+app.post('/addProduct', (req, res) => {
+    let body = req.body
+    db.collection('sellers').findOneAndUpdate({  _id: ObjectId(body._id) }, {
+        $push: {
+            products: {
+                productName: body.productName,
+                productCategory: body.productCategory,
+                productDescription: body.productDescription,
+                productPrice: body.productPrice,
+                productQuantity: body.productQuantity,
+                productShippingCost: body.productShippingCost,
+                productImage: body.productImage,
+                createdOn: { type: Date, default: Date.now },
+
+            }
+        }
+    },
+        (err, result) => {
+            if (!err) {
+                // result.shopImageUrl = result.shopImageUrl.slice(0, 9)
+                console.log("data saved: ", result);
+                res.status(201).send({ message: "Your product has been successfully added!" });
+            } else {
+                console.log("db error: ", err);
+                res.status(500).send({ message: "internal server error" });
+            }
+        });
+
+
+
+
+
+})
+
+
+
+
 
 
 
