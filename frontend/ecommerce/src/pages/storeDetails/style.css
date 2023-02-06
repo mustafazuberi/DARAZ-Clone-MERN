@@ -1,0 +1,84 @@
+.shopBg {
+    margin-top: 25px;
+    width: 100%;
+    height: 30vh;
+}
+
+.mainFollowerDiv {
+    background-color: white;
+    width: 350px;
+    padding: 15px;
+    position: relative;
+    top: 85px;
+    left: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: darkgray;
+}
+
+.mainFollowerDivIcon {
+    color: rgb(5, 78, 78);
+}
+
+.mainFollowerDiv>div {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.chatNow:hover {
+    background-color: #e1fffd;
+}
+
+.follow:hover {
+    background-color: #fce7c7;
+}
+
+@media only screen and (max-width: 380px) {
+    .mainFollowerDiv {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .mainFollowerDiv {
+        width: 280px;
+        top: 75px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .mainFollowerDiv {
+        width: 240px;
+        top: 75px;
+    }
+}
+
+.allProdHeading {
+    font-weight: 300;
+    color: rgb(5, 78, 78);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 10px 10px 40px;
+}
+
+
+.allProductsDiv {
+    padding: 20px 40px 50px 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.shopHeading {
+    color: #f85606;
+    text-align: center;
+    margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-bottom: 4px solid black;
+    display: inline-block;
+}
+.shopHeadingDiv{
+    text-align: center;
+}

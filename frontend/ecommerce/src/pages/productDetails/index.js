@@ -5,7 +5,7 @@ import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 
 
-import { useParams,useNavigate  } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
@@ -44,7 +44,6 @@ const Index = () => {
                 // getting data of seller who is selling this product
                 const responseStore = await axios.get(`${baseUrl}/detailPageSeller/${response.data.sellerId}`)
                 setStoreOwner(responseStore.data)
-                // console.log("ye dekh", responseStore.data)
 
             } catch (e) {
                 console.log(e)
@@ -60,7 +59,7 @@ const Index = () => {
 
 
 
-   
+
 
 
 
@@ -96,11 +95,7 @@ const Index = () => {
                             <button className='addToWishList'>Add to wishlist</button>
                             <button className='addToCart'>Add to cart</button>
                         </div>
-
-
                     </div>
-
-
                 </div>
 
 
@@ -118,7 +113,7 @@ const Index = () => {
                     <div className="address">
                         Store Address :  <LocationOnIcon style={{ color: "grey" }} />  {storeOwner.city}, {storeOwner.country}
                     </div>
-                    <div className="delivery" onClick={()=> navigate(`/StoreDetails/${storeOwner._id}`)}>View Store</div>
+                    <div className="delivery" onClick={() => navigate(`/StoreDetails/${storeOwner._id}`)}>View Store</div>
                 </div>
 
 

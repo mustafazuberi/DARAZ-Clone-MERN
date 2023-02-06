@@ -212,18 +212,22 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.sellerSec >div{
+
+.sellerSec>div {
     width: 30%;
 }
+
 @media only screen and (max-width:720px) {
-    .sellerSec{
+    .sellerSec {
         flex-direction: column;
     }
-    .sellerSec >div{
+
+    .sellerSec>div {
         width: 100%;
         text-align: left;
     }
-    .chatsec{
+
+    .chatsec {
         justify-content: space-between !important;
         text-align: left;
     }
@@ -246,6 +250,7 @@
     cursor: pointer;
     text-align: center;
 }
+
 .delivery:hover {
     text-decoration: underline;
 }
@@ -255,21 +260,25 @@
     font-size: 19px;
 }
 
-.reviewSec{
+.reviewSec {
     width: 90%;
     margin: 0 auto;
     height: 40vh;
 }
-.commentSec{
+
+.commentSec {
     width: 90%;
     margin: 0 auto;
     height: 40vh;
 }
-.comments h1 , .reviews h1{
+
+.comments h1,
+.reviews h1 {
     text-align: center;
     margin-top: 50px;
 }
-.inpComm{
+
+.inpComm {
     display: flex;
     flex-direction: row;
 }

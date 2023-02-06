@@ -492,6 +492,30 @@ app.get('/detailPageSeller/:sellerId', (req, res) => {
 
 
 
+
+
+
+app.post('/followStore/:storeId', (req, res) => {
+    sellerModel.findOneAndUpdate({ _id: ObjectId(req.params.storeId) }, {
+        $push: {
+            followers: { cutomerId: req.body.customerId }
+        }
+    }, (err, result) => {
+        if (!err) {
+            res.send({ result, message: "Your are following." })
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
+
 app.get('/', (req, res) => {
     res.send('this is / page')
 })
