@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser')
 const { stringToHash, varifyHash } = require('bcrypt-inzi')
 const cors = require('cors')
 const { db } = require('./models/addProductSchema')
+const productModel = require('./models/addProductSchema')
 
 const app = express()
 const SECRET = process.env.SECRET || "topsecret"
@@ -344,21 +345,21 @@ app.post('/signupAsSeller', (req, res) => {
 
 app.post('/addProduct', (req, res) => {
     let body = req.body
-    db.collection('sellers').findOneAndUpdate({  _id: ObjectId(body._id) }, {
-        $push: {
-            products: {
-                productName: body.productName,
-                productCategory: body.productCategory,
-                productDescription: body.productDescription,
-                productPrice: body.productPrice,
-                productQuantity: body.productQuantity,
-                productShippingCost: body.productShippingCost,
-                productImage: body.productImage,
-                createdOn: { type: Date, default: Date.now },
+    productModel.create(
+        {
+            _id: body._id + Date.now(),
+            sellerId: body._id,
+            productName: body.productName,
+            productCategory: body.productCategory,
+            productDescription: body.productDescription,
+            productPrice: body.productPrice,
+            productQuantity: body.productQuantity,
+            productShippingCost: body.productShippingCost,
+            productImage: body.productImage,
+            createdOn: Date.now(),
 
-            }
         }
-    },
+        ,
         (err, result) => {
             if (!err) {
                 // result.shopImageUrl = result.shopImageUrl.slice(0, 9)
@@ -369,15 +370,123 @@ app.post('/addProduct', (req, res) => {
                 res.status(500).send({ message: "internal server error" });
             }
         });
-
-
-
-
-
 })
 
 
 
+
+
+
+
+
+
+app.get('/getSellerProducts/:_id', (req, res) => {
+    productModel.find(
+        { sellerId: req.params._id },
+        {}, (err, result) => {
+            if (!err) {
+                // console.log("data received: ", result);
+                res.status(201).send(result);
+            } else {
+                // console.log("db error: ", err);
+                res.status(500).send({ message: "internal server error" });
+            }
+        })
+})
+
+
+
+
+
+app.post('/updateProduct/:id', (req, res) => {
+    let body = req.body
+    productModel.findOneAndReplace({ _id: req.params.id }, {
+        _id: req.params._id,
+        sellerId: body.sellerId,
+        productName: body.productName,
+        productCategory: body.productCategory,
+        productDescription: body.productDescription,
+        productPrice: body.productPrice,
+        productQuantity: body.productQuantity,
+        productShippingCost: body.productShippingCost,
+        productImage: body.productImage,
+        createdOn: Date.now(),
+
+    }, { new: true }, (err, result) => {
+        if (!err) {
+            console.log("data saved")
+            res.send({ message: "Product updated successfully" })
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+app.delete('/deleteProduct/:id', (req, res) => {
+    productModel.deleteOne({ _id: req.params.id }, (err, result) => {
+        if (!err) {
+            console.log("deleted.")
+            res.send({ message: "Product deleted successfully." })
+        } else {
+            console.log(err)
+        }
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+app.get('/getAllProducts', (req, res) => {
+    productModel.find({}, (err, result) => {
+        if (!err) {
+            res.status(201).send(result);
+        } else {
+            res.status(500).send({ message: "internal server error" });
+        }
+    })
+})
+
+
+
+
+
+app.get('/detailPageProduct/:id', (req, res) => {
+    productModel.findOne({ _id: req.params.id }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            res.status(500).send({ message: "internal server error" });
+        }
+    })
+})
+
+
+
+
+
+app.get('/detailPageSeller/:sellerId', (req, res) => {
+    sellerModel.findOne({ _id: req.params.sellerId }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            res.status(500).send({ message: "internal server error" });
+        }
+    })
+})
 
 
 

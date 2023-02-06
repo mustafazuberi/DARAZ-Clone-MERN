@@ -1,0 +1,275 @@
+.productCategory {
+    color: #27b4df;
+
+}
+
+.detailMainContainer {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #ececec;
+    height: auto;
+}
+
+
+
+.ImageDiv {
+    width: 40%;
+    height: 80vh;
+}
+
+.ImageDiv img {
+    width: 100%;
+    height: 100%;
+}
+
+.detailDiv {
+    padding: 40px 50px 50px 50px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detailDiv h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 38px;
+    color: #f85606;
+}
+
+.accptCart h1 {
+    font-size: 52px;
+}
+
+.productDesc {
+    color: black;
+    font-size: 17px;
+    font-family: monospace;
+    padding-top: 20px;
+}
+
+.shippingCost {
+    color: grey
+}
+
+
+
+
+.addToCartDetail {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    color: #f85606;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    font-family: cursive;
+}
+
+.cartDiv button {
+    display: block;
+    padding: 13px 70px 13px 70px;
+    border: none;
+    color: white;
+    font-family: 14px;
+    font-weight: 300;
+}
+
+.cartDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.addToCart {
+    background-color: #f85606;
+}
+
+.addToCart:hover {
+    background-color: #da4e08;
+    transition: 0.2s;
+}
+
+.addToWishList {
+    background-color: #2abbe8;
+}
+
+.addToWishList:hover {
+    background-color: #27b4df;
+    transition: 0.2s;
+}
+
+.qtBtn {
+    background-color: #e0dede;
+    color: rgb(128, 128, 128);
+    border: none;
+}
+
+.qtBtn:hover {
+    color: white;
+    background-color: #ececec;
+}
+
+.qtText {
+    color: grey;
+    margin-right: 30px;
+}
+
+.qty {
+    padding: 0px 10px 0px 10px;
+}
+
+
+
+
+
+
+@media only screen and (max-width:1130px) {
+    .detailDiv {
+        width: 60%;
+    }
+
+    .cartDiv {
+        width: 80%;
+    }
+
+    .detailMainContainer {
+        flex-direction: column;
+        width: 70%;
+    }
+
+    .detailMainContainer>div {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:1050px) {
+    .cartDiv {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width:960px) {
+    .cartDiv {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width:930px) {
+    .cartDiv {
+        width: 90%;
+    }
+}
+
+
+
+
+@media only screen and (max-width:830px) {
+    .detailMainContainer {
+        width: 90%;
+    }
+
+    .cartDiv {
+        width: 80%;
+    }
+}
+
+
+@media only screen and (max-width:750px) {
+    .cartDiv {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:670px) {
+    .cartDiv {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:616px) {
+    .cartDiv {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .cartDiv button {
+        margin-bottom: 10px;
+    }
+}
+
+
+
+.sellerSec {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    color: grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.sellerSec >div{
+    width: 30%;
+}
+@media only screen and (max-width:720px) {
+    .sellerSec{
+        flex-direction: column;
+    }
+    .sellerSec >div{
+        width: 100%;
+        text-align: left;
+    }
+    .chatsec{
+        justify-content: space-between !important;
+        text-align: left;
+    }
+}
+
+
+
+
+.chatsec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-weight: 600;
+}
+
+.delivery {
+    color: #27b4df;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.delivery:hover {
+    text-decoration: underline;
+}
+
+.storeName {
+    color: black;
+    font-size: 19px;
+}
+
+.reviewSec{
+    width: 90%;
+    margin: 0 auto;
+    height: 40vh;
+}
+.commentSec{
+    width: 90%;
+    margin: 0 auto;
+    height: 40vh;
+}
+.comments h1 , .reviews h1{
+    text-align: center;
+    margin-top: 50px;
+}
+.inpComm{
+    display: flex;
+    flex-direction: row;
+}

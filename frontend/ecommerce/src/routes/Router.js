@@ -6,6 +6,8 @@ import Signup from '../pages/Signup';
 import SellOnDaraz from '../pages/SellOnDaraz';
 import SellerHome from '../pages/sellerHome';
 import MyProducts from '../pages/MyProducts/MyProducts';
+import ProductDetails from '../pages/productDetails/index'
+import StoreDetails from "../pages/storeDetails/index"
 import {
     createBrowserRouter,
     RouterProvider,
@@ -39,6 +41,14 @@ const Router = () => {
         {
             path: "/sellerMyProducts",
             element: <MyProducts />,
+        },
+        {
+            path: "/productDetails/:id",
+            element: <ProductDetails />,
+        },
+        {
+            path: "/StoreDetails/:id",
+            element: <StoreDetails />,
         },
     ]);
 
