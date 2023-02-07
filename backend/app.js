@@ -514,6 +514,30 @@ app.post('/followStore/:storeId', (req, res) => {
 
 
 
+app.post('/updateShopInfo/:storeId', (req, res) => {
+    sellerModel.findOneAndUpdate({ _id: ObjectId(req.params.storeId) }, {
+        $set: {
+            shopName: req.body.shopName,
+            phoneNumber: req.body.shopPhoneNumber,
+            city: req.body.city,
+            productCategory: req.body.productCategory,
+            shopImageUrl: req.body.shopImageUrl,
+        }
+
+    }, (err, result) => {
+        if (!err) {
+            console.log(result)
+            // let updatedDoc = sellerModel.findOne({ _id: ObjectId(req.params.storeId) });
+            res.send({ result, message: "Your shop information has been updated successfully!." })
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
 
 
 app.get('/', (req, res) => {

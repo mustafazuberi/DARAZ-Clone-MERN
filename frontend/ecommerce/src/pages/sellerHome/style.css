@@ -104,3 +104,51 @@
         flex-direction: column;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.updateInfoHeading {
+    font-family: monospace;
+    margin-top: 40px;
+    text-align: center;
+    color: #d35a1e;
+}
+
+.updateDiv {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.updateInps {
+    width: 100%;
+}
+.imageDiv{
+    width: 300px;
+    height: 250px;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+.imageDiv img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.updateStoreInfo{
+    border: none;
+    padding: 7px 22px 7px 22px ;
+    border-radius: 5px;
+    background-color: rgb(226, 43, 186);
+    color: white;
+    cursor: pointer;
+    margin-left: 5%;
+    margin-top: 110px;
+}

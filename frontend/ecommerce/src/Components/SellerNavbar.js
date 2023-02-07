@@ -113,7 +113,7 @@ const SellerNavbar = () => {
 
 
                 <div className="profileIconDiv">
-                    <img src={sellerAuth.shopImageUrl} alt="" />
+                    <img src={sellerAuthInfo.shopImageUrl} alt="" />
                     <span className="mx-2 my-2">{sellerAuthInfo.shopName}</span>
                     <Dropdown menu={{ items }} placement="topLeft">
                         <ArrowDropDownCircleIcon className="my-2" style={{ cursor: "pointer", color: "#f85606" }} />
