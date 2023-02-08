@@ -540,6 +540,27 @@ app.post('/updateShopInfo/:storeId', (req, res) => {
 
 
 
+
+
+
+app.post('/addToWishlist/:userId', (req, res) => {
+    userModel.findOneAndUpdate({ _id: ObjectId(req.params.userId) }, {
+        $push: {
+            wishlist: { item: req.body.product }
+        }
+    }, (err, result) => {
+        if (!err) {
+            res.send({ result, message: "Item Successfully Added to Wishlist!" })
+        }
+    })
+})
+
+
+
+
+
+
+
 app.get('/', (req, res) => {
     res.send('this is / page')
 })

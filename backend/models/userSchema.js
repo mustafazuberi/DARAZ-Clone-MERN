@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     DOB: { type: Date, required: true },
+    wishlist: { type: Array },
     createdOn: { type: Date, default: Date.now },
 });
 const userModel = mongoose.model('Users', userSchema);

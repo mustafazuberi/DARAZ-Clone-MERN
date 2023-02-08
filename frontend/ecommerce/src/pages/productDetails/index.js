@@ -3,7 +3,7 @@ import './style.css'
 
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
-
+import swal from 'sweetalert'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -15,12 +15,15 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SendIcon from '@mui/icons-material/Send';
 import { TextField } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 
 const baseUrl = "http://localhost:4000"
 const Index = () => {
 
     const navigate = useNavigate()
+    const authInfo = useSelector(state => state.authData)
+
 
 
 
@@ -51,11 +54,25 @@ const Index = () => {
         }
         detailPageData()
 
-
-
-
     }, [])
 
+
+
+
+    const addToWishlist = async (product) => {
+        try {
+            const response = await axios.post(`${baseUrl}/addToWishlist/${authInfo._id}`, {
+                product
+            })
+
+            
+
+            swal(response.data.message)
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
 
 
@@ -92,7 +109,7 @@ const Index = () => {
                         </div>
 
                         <div className="cartDiv my-5">
-                            <button className='addToWishList'>Add to wishlist</button>
+                            <button className='addToWishList' onClick={() => addToWishlist(productDetail)}>Add to wishlist</button>
                             <button className='addToCart'>Add to cart</button>
                         </div>
                     </div>
