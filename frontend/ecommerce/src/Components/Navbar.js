@@ -130,7 +130,7 @@ const Navbar = () => {
                         <div className="searchIcon"><SearchIcon style={{ color: "white", cursor: "pointer" }} /></div>
                     </div>
                 </div>
-                <div className="cart"><ShoppingCartCheckoutIcon style={{ cursor: "pointer" }} /></div>
+                <div className="cart" onClick={() => navigate('/userCart')}><ShoppingCartCheckoutIcon style={{ cursor: "pointer" }} /></div>
                 <div className="download"><img src={navbarDownloadImage} className="navbarDownloadImage" alt="" /></div>
             </div>
         </div>

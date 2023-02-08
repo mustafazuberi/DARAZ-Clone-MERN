@@ -9,6 +9,7 @@ import MyProducts from '../pages/MyProducts/MyProducts';
 import ProductDetails from '../pages/productDetails/index'
 import StoreDetails from "../pages/storeDetails/index"
 import UserWishList from  "../pages/userWishList/index"
+import UserCart from "../pages/UserCart/index"
 
 import {
     createBrowserRouter,
@@ -55,6 +56,10 @@ const Router = () => {
         {
             path: "/userWishList",
             element: <UserWishList/>,
+        },
+        {
+            path: "/userCart",
+            element: <UserCart/>,
         },
     ]);
 

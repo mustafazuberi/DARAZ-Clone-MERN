@@ -48,3 +48,26 @@ export const sellerAuth = (sellerAuth) => {
 
 
 
+export const addToCart = (cartItem) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'addToCart',
+            payLoad: cartItem
+        })
+    }
+}
+
+
+
+
+export const removeFromCart = (cartItem) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'removeFromCart',
+            payLoad: cartItem
+        })
+    }
+}
+
+
+

@@ -1,0 +1,91 @@
+.cartMainPage {
+    min-height: 90vh;
+    margin-top: 20px;
+    background-color: #ececec;
+
+
+}
+
+.cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.itemsHeading {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    background-color: white;
+    padding: 6px 12px 6px 32px;
+}
+
+.checkOutDiv {
+    width: 30%;
+    background-color: white;
+    padding: 20px 40px 20px 40px;
+}
+
+.proceed {
+    background-color: #f85606;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    border-radius: 2px;
+}
+
+.proceed:hover {
+    background-color: #d44904;
+    transition: 0.2s;
+}
+
+
+
+/* Item CSs */
+.cartItemsDiv{
+    width: 60%;
+}
+.cartItems {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px 10px 20px;
+    /* padding: 10px; */
+    margin-top: 20px;
+    background-color: white;
+    width: 100%;
+}
+
+.item .img {
+    width: 100px;
+    height: 100px;
+}
+
+.item .img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+
+.mainDetails h4 {
+    font-size: 16px;
+}
+
+.mainDetails h6 {
+    font-size: 13px;
+}
+.deleteBtn{
+    float: right;
+    margin-bottom: 10px;
+}
+.right{
+    display: flex;
+    flex-direction: row;
+}

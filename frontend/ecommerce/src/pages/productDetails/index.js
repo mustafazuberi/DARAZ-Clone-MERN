@@ -36,11 +36,10 @@ const Index = () => {
 
 
     const dispatch = useDispatch()
-    const { authData } = bindActionCreators(actionCreators, dispatch)
+    const { authData, addToCart } = bindActionCreators(actionCreators, dispatch)
 
 
 
-    let [productQty, setProductQty] = useState(0)
 
 
 
@@ -95,6 +94,12 @@ const Index = () => {
 
 
 
+    const addItemInCart = ()=>{
+        addToCart(productDetail)
+        swal("Item added in your cart.")
+    }
+
+
 
 
 
@@ -120,16 +125,11 @@ const Index = () => {
                         <p className="productCategory">Category : {productDetail.productCategory}</p>
 
 
-                        <div className="qtyDiv">
-                            <span className="qtText">Quantity</span>
-                            <button className='qtBtn' disabled={productQty ? false : true} onClick={() => setProductQty(--productQty)} ><RemoveIcon style={{ fontSize: "12px" }} /></button>
-                            <span className="qty">{productQty}</span>
-                            <button className='qtBtn'><AddIcon style={{ fontSize: "12px" }} onClick={() => setProductQty(++productQty)} /></button>
-                        </div>
+                     
 
                         <div className="cartDiv my-5">
                             <button className='addToWishList' onClick={() => addToWishlist(productDetail)}>Add to wishlist</button>
-                            <button className='addToCart'>Add to cart</button>
+                            <button className='addToCart' onClick={addItemInCart}>Add to cart</button>
                         </div>
                     </div>
                 </div>
