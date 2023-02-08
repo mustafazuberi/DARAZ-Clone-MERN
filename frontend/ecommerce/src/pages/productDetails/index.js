@@ -18,12 +18,25 @@ import { TextField } from '@mui/material'
 import { useSelector } from 'react-redux'
 
 
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreators from "./../../store/index"
+
+
+
+
+
+
+
 const baseUrl = "http://localhost:4000"
 const Index = () => {
 
     const navigate = useNavigate()
     const authInfo = useSelector(state => state.authData)
 
+
+    const dispatch = useDispatch()
+    const { authData } = bindActionCreators(actionCreators, dispatch)
 
 
 
@@ -60,15 +73,21 @@ const Index = () => {
 
 
     const addToWishlist = async (product) => {
+        if (authInfo.wishlist) {
+            for (let item of authInfo.wishlist) {
+                if (item.item._id === product._id) {
+                    swal("Item already available in your wishlish.")
+                    return
+                }
+            }
+        }
         try {
             const response = await axios.post(`${baseUrl}/addToWishlist/${authInfo._id}`, {
                 product
             })
-
-            
-
+            const userUpdatedData = await axios.get(`${baseUrl}/getUserData/${authInfo._id}`)
+            authData(userUpdatedData.data)
             swal(response.data.message)
-
         } catch (e) {
             console.log(e)
         }

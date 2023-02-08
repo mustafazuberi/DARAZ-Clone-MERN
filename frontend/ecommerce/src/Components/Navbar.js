@@ -82,8 +82,8 @@ const Navbar = () => {
         {
             key: '2',
             label: (
-                <a style={{ textDecoration: "none" }} >
-                    <FavoriteBorderIcon style={{ color: "grey" }} /> My Wishlist & Followed Stores
+                <a style={{ textDecoration: "none" }} onClick={() => navigate('/userWishList')}>
+                    <FavoriteBorderIcon style={{ color: "grey" }} /> My Wishlist
                 </a>
             ),
         },

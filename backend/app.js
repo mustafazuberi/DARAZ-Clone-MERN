@@ -161,7 +161,8 @@ app.post('/login', (req, res) => {
                                     email: data.email,
                                     fullName: data.fullName,
                                     DOB: data.DOB,
-                                    _id: data._id
+                                    _id: data._id,
+                                    wishlist: data.wishlist
                                 },
                                 whereToNavigate: "/"
                             });
@@ -553,6 +554,36 @@ app.post('/addToWishlist/:userId', (req, res) => {
             res.send({ result, message: "Item Successfully Added to Wishlist!" })
         }
     })
+})
+
+
+
+
+
+app.get('/getUserData/:userId', (req, res) => {
+    userModel.findOne({ _id: ObjectId(req.params.userId) }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+app.post('/updateWishList/:userId', (req, res) => {
+    userModel.findOneAndUpdate({ _id: ObjectId(req.params.userId) },
+        { $set: { wishlist: req.body.wishlist } }, (err, result) => {
+            if (!err) {
+                res.send({result,message:"Product deleted successfully!"})
+            } else {
+                console.log(err)
+            }
+        })
 })
 
 

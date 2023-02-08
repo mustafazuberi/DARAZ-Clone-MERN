@@ -8,6 +8,8 @@ import SellerHome from '../pages/sellerHome';
 import MyProducts from '../pages/MyProducts/MyProducts';
 import ProductDetails from '../pages/productDetails/index'
 import StoreDetails from "../pages/storeDetails/index"
+import UserWishList from  "../pages/userWishList/index"
+
 import {
     createBrowserRouter,
     RouterProvider,
@@ -49,6 +51,10 @@ const Router = () => {
         {
             path: "/StoreDetails/:id",
             element: <StoreDetails />,
+        },
+        {
+            path: "/userWishList",
+            element: <UserWishList/>,
         },
     ]);
 
