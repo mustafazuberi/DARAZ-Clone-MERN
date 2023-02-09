@@ -24,9 +24,10 @@ import actionCreators from "./../../store/index"
 
 
 
-
-
-
+import { Button } from 'antd';
+import { Drawer, Space } from 'antd';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { Input } from 'antd';
 
 const baseUrl = "http://localhost:4000"
 const Index = () => {
@@ -66,6 +67,8 @@ const Index = () => {
         }
         detailPageData()
 
+
+
     }, [])
 
 
@@ -94,7 +97,7 @@ const Index = () => {
 
 
 
-    const addItemInCart = ()=>{
+    const addItemInCart = () => {
         addToCart(productDetail)
         swal("Item added in your cart.")
     }
@@ -102,6 +105,83 @@ const Index = () => {
 
 
 
+
+
+
+
+
+    // Chat work
+
+    const [allChats, setAllChats] = useState([])
+    useEffect(() => {
+        const getChats = async () => {
+            const response = await axios.get(`${baseUrl}/getChats`)
+            const mychats = response.data.filter(item => item.userId === authInfo._id)
+            setAllChats(mychats)
+        }
+        getChats()
+
+
+
+    }, [])
+
+
+
+    const [messageScreen, setMessageScreen] = useState(false)
+    const [sellerToMessage, setSellerToMessage] = useState({})
+    const showMessageScreen = async (item) => {
+        setMessageScreen(true)
+        setSellerToMessage(item)
+        const response = await axios.get(`${baseUrl}/getMessages/${authInfo._id + productDetail.sellerId}`)
+        setAllMessages(response.data.messages)
+    }
+
+    const createChat = async () => {
+        allChats.forEach((item) => {
+            if (item._id === authInfo._id + storeOwner._id) {
+                return
+            }
+        })
+        const response = await axios.post(`${baseUrl}/createChat`, {
+            userId: authInfo._id,
+            sellerId: storeOwner._id,
+            userName: authInfo.fullName,
+            sellerName: storeOwner.shopName,
+            sellerImageUrl: storeOwner.shopImageUrl,
+            messages: []
+        })
+        console.log(response)
+        setOpen(true)
+    }
+
+    const [open, setOpen] = useState(false);
+    const [placement, setPlacement] = useState('right');
+    const showDrawer = () => {
+        setOpen(true);
+    };
+    const onClose = () => {
+        setOpen(false);
+        setMessageScreen(false)
+    };
+    const onChange = (e) => {
+        setPlacement(e.target.value);
+    };
+
+
+    const [allMessages, setAllMessages] = useState([])
+    const [messageText, setMessageText] = useState('')
+    const sendMessage = async () => {
+        const response = await axios.post(`${baseUrl}/sendMessage`, {
+            text: messageText,
+            chatRoomId: authInfo._id + storeOwner._id,
+            sendBy: authInfo._id,
+            sendTo: storeOwner._id
+        })
+        setMessageText('')
+        setAllMessages(response.data.result.messages)
+    }
+
+    console.log(allMessages)
 
 
 
@@ -125,7 +205,7 @@ const Index = () => {
                         <p className="productCategory">Category : {productDetail.productCategory}</p>
 
 
-                     
+
 
                         <div className="cartDiv my-5">
                             <button className='addToWishList' onClick={() => addToWishlist(productDetail)}>Add to wishlist</button>
@@ -142,7 +222,7 @@ const Index = () => {
                         <div className="storeName">
                             <span style={{ color: "grey", fontSize: "14px" }}>Sold by</span> : <span className="storeName">{storeOwner.shopName}</span>
                         </div>
-                        <div className="chat" style={{ color: "#2abbe8", cursor: 'pointer' }} >
+                        <div className="chat" onClick={createChat} style={{ color: "#2abbe8", cursor: 'pointer' }} >
                             Chat <ChatBubbleIcon style={{ color: "#2abbe8", fontSize: "13px" }} />
                         </div>
                     </div>
@@ -187,8 +267,106 @@ const Index = () => {
 
 
 
+
+
+
+
+                {/* For Drawer */}
+
+                <div onClick={showDrawer} type="primary" className='msgsBtn' >
+                    <ChatBubbleIcon className='mx-1' />   Messages
+                </div>
+
+
+                <Drawer
+                    title={messageScreen ? "" : "Messages"}
+                    placement={placement}
+                    closable={false}
+                    onClose={onClose}
+                    open={open}
+                    key={placement}
+                    extra={
+                        <Space>
+                            <Button onClick={onClose}>Cancel</Button>
+                        </Space>
+                    }
+                >
+                    <div className="usersScreen">
+
+                        <div className="userItem" style={messageScreen ? { display: "none" } : { display: "block" }}>
+                            {
+                                allChats.map((item, index) => {
+                                    return <div className="chatBoxItem p-2" key={index} onClick={() => showMessageScreen(item)}>
+                                        <div className="profile">
+                                            <img src={item.sellerImageUrl} />
+                                        </div>
+                                        <div className="p-2 sellerName">
+                                            {item.sellerName}
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div>
+
+
+
+                        {/* Msg Screen */}
+                        <div className="messageScreen" style={messageScreen ? { display: "block" } : { display: "none" }}>
+                            <div className="msgScrenHeader">
+                                <KeyboardBackspaceIcon className='mx-2 mt-2' style={{ cursor: "pointer" }} onClick={() => setMessageScreen(false)} />
+                                <div className="profile">
+                                    <img src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=" alt="" />
+                                </div>
+                                <div className="mx-2 mt-2 sellerName">
+                                    John Doe
+                                </div>
+                            </div>
+
+                            <div className="allMsgs">
+                                {
+                                    allMessages ? allMessages.map((item, index) => {
+                                        if (item.msgItem.sendBy === authInfo._id) {
+                                            return <div key={index} className="currentUserMsg">
+                                                this is sent message
+                                                <span className="time">3:28</span>
+                                            </div>
+                                        } else {
+                                            return <div className="friendMsg">
+                                                this is received message
+                                                <span className="time">3:48</span>
+                                            </div>
+                                        }
+                                    })
+                                        : ""
+                                }
+                            </div>
+
+                            <div className="sendInpBox">
+                                <Input placeholder="Send Message Here!" value={messageText} onChange={(e) => setMessageText(e.target.value)} allowClear /><SendIcon onClick={sendMessage} className='mx-2' style={{ color: "#da4e08" }} />
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </Drawer>
+
+
+
+
+
+
+
+
+
+
+
                 <Footer />
-            </div>
+            </div >
 
         </>
     )

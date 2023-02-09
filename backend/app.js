@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userModel = require('./models/userSchema')
 const sellerModel = require('./models/sellerSchema')
 const addProductModel = require('./models/addProductSchema')
+const chatModel = require('./models/chatSchema')
 
 const jwt = require('jsonwebtoken');
 const ObjectId = require('mongodb').ObjectId;
@@ -579,7 +580,7 @@ app.post('/updateWishList/:userId', (req, res) => {
     userModel.findOneAndUpdate({ _id: ObjectId(req.params.userId) },
         { $set: { wishlist: req.body.wishlist } }, (err, result) => {
             if (!err) {
-                res.send({result,message:"Product deleted successfully!"})
+                res.send({ result, message: "Product deleted successfully!" })
             } else {
                 console.log(err)
             }
@@ -587,6 +588,78 @@ app.post('/updateWishList/:userId', (req, res) => {
 })
 
 
+
+
+
+app.get('/getChats', (req, res) => {
+    chatModel.find({}, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+app.post('/createChat', (req, res) => {
+    chatModel.create({
+        _id: req.body.userId + req.body.sellerId,
+        userId: req.body.userId,
+        sellerId: req.body.sellerId,
+        userName: req.body.userName,
+        sellerName: req.body.sellerName,
+        sellerImageUrl: req.body.sellerImageUrl,
+        messages: []
+    }, (err, result) => {
+        if (!err) {
+            res.send({ result, message: "created" })
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+app.post('/sendMessage', (req, res) => {
+    const message = {
+        text: req.body.text,
+        createdOn: Date.now(),
+        sendBy: req.body.sendBy,
+        sendTo: req.body.sendTo
+    }
+
+    chatModel.findOneAndUpdate({ _id: req.body.chatRoomId }, {
+        $push: {
+            messages: { msgItem: message }
+        }
+    }, (err, result) => {
+        if (!err) {
+            res.send({ result, message: "Message Sent!" })
+        } else {
+            console.log(err)
+        }
+    })
+
+
+})
+
+
+
+
+
+app.get('/getMessages/:roomId', (req, res) => {
+    chatModel.findOne({ _id: req.params.roomId }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
 
 
 

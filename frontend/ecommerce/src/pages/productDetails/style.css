@@ -282,3 +282,74 @@
     display: flex;
     flex-direction: row;
 }
+
+
+
+.messageScreen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 3 1;
+}
+
+.msgScrenHeader .profile {
+    width: 50px;
+    height: 50px;
+}
+
+.msgScrenHeader .profile img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.msgScrenHeader {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #da4e08;
+    width: 100%;
+    padding-bottom: 5px;
+
+}
+
+.msgScrenHeader .sellerName {
+    font-size: 15px;
+}
+
+.sendInpBox {
+    display: flex;
+}
+
+.allMsgs {
+    height: 76vh;
+    overflow-y: auto;
+}
+
+
+
+.currentUserMsg {
+    background-color: #ececec;
+    width: 70%;
+    float: right;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border-bottom-right-radius: 0px;
+}
+
+.friendMsg {
+    width: 70%;
+    float: left;
+    background-color: #ececec;
+    padding: 10px;
+    border-radius: 12px;
+    border-bottom-left-radius: 0px;
+    margin-bottom: 10px;
+}
+.time{
+    float: right;
+    font-size: 11px;
+    position: relative;
+    margin-top: 10px;
+    color: #da4e08;
+}

@@ -114,7 +114,7 @@ const SellerHome = () => {
             })
             const responseSeller = await axios.get(`${baseUrl}/detailPageSeller/${sellerAuthInfo._id}`)
             sellerAuth(responseSeller.data)
-           swal(response.data.message)
+            swal(response.data.message)
 
 
         } catch (e) {

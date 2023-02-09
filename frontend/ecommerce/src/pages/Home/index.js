@@ -18,8 +18,6 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-
-
 const baseUrl = "http://localhost:4000"
 const Home = () => {
     const navigate = useNavigate()
@@ -36,6 +34,26 @@ const Home = () => {
         getAllProducts()
 
     }, [])
+
+
+
+
+
+
+    // For Antd drawer
+    const [open, setOpen] = useState(false);
+    const [size, setSize] = useState('large');
+    const showLargeDrawer = () => {
+        setOpen(true);
+    };
+    const onClose = () => {
+        setOpen(false);
+    };
+
+
+   
+
+
 
 
     return (
@@ -81,6 +99,15 @@ const Home = () => {
                     })
                 }
             </div>
+
+
+
+         
+
+
+
+
+
             <br /><br />
             <button className="loadMore">LOAD MORE</button>
 

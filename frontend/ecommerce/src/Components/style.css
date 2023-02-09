@@ -280,3 +280,14 @@
         margin: 30px 10px 30px 30px;
     }
 }
+
+.qtyOfItems {
+    background-color: #f85606;
+    color: #ececec;
+    border-radius: 50%;
+    width: 20px ;
+    text-align: center;
+    height: 25px;
+    position: relative;
+    margin-top: -10px;
+}

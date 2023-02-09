@@ -69,6 +69,9 @@ const Navbar = () => {
     }
 
 
+
+
+
     // For dropdown Antd
     const items = [
         {
@@ -108,10 +111,20 @@ const Navbar = () => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 
+    const cartItems = useSelector(state => state.cartItems)
+
 
     return (
         <div className='mainNavbar'>
             <div className="sec1">
+
+
+                
+
+
+
+
+
                 <div className="sec1LinkItem" style={isLoggined ? { display: "none" } : { display: "flex" }}><span onClick={isLoggined ? () => null : () => navigate('/sellOnDaraz')}> Sell on Daraz</span></div>
                 <div className="sec1LinkItem" style={isLoggined ? { display: "none" } : { display: "flex" }}><span onClick={isLoggined ? () => null : () => navigate('/login')}> login</span></div>
                 <div className="sec1LinkItem" style={isLoggined ? { display: "flex" } : { display: "none" }}><span onClick={isLoggined ? () => null : () => navigate('/login')}>
@@ -130,10 +143,10 @@ const Navbar = () => {
                         <div className="searchIcon"><SearchIcon style={{ color: "white", cursor: "pointer" }} /></div>
                     </div>
                 </div>
-                <div className="cart" onClick={() => navigate('/userCart')}><ShoppingCartCheckoutIcon style={{ cursor: "pointer" }} /></div>
+                <div className="cart" onClick={() => navigate('/userCart')}><ShoppingCartCheckoutIcon style={{ cursor: "pointer" }} /> {cartItems.length !== 0 ? <span className="qtyOfItems">{cartItems.length}</span> : <span className=""></span>}</div>
                 <div className="download"><img src={navbarDownloadImage} className="navbarDownloadImage" alt="" /></div>
             </div>
-        </div>
+        </div >
     )
 }
 

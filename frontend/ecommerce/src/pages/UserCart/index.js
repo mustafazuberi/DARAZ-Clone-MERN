@@ -70,15 +70,15 @@ const UserCart = () => {
                                                 <img src={item.productImage} alt="" />
                                             </div>
                                             <div className="mainDetails p-2">
-                                                <h4>{item.productName}</h4>
+                                                <h4>{item.productName.slice(0, 15)}...</h4>
                                                 <h6>Category : {item.productCategory}</h6>
                                                 <h6>{item.productPrice}</h6>
                                             </div>
                                         </div>
                                         <div className="buttons">
-                                            <Button className='deleteBtn' onClick={() => deleteProductFromCart(item)} colorscheme='gray' ><DeleteIcon /> delete</Button>
+                                            <Button className='deleteBtn' onClick={() => deleteProductFromCart(item)} colorscheme='gray' ><DeleteIcon className='mx-1' /> delete</Button>
                                             <div className="qtyDiv">
-                                                <span className="qtText">Quantity</span>
+                                                <span className="qtText">Quantity</span> <br />
                                                 <button className='qtBtn' disabled={productQty ? false : true} onClick={() => setProductQty(--productQty)} ><RemoveIcon style={{ fontSize: "12px" }} /></button>
                                                 <span className="qty">{productQty}</span>
                                                 <button className='qtBtn'><AddIcon style={{ fontSize: "12px" }} onClick={() => setProductQty(++productQty)} /></button>
