@@ -35,7 +35,6 @@ const SellerNavbar = () => {
     const dispatch = useDispatch()
     const isLogginedSeller = useSelector(state => state.isSeller)
     const sellerAuthInfo = useSelector(state => state.sellerAuth)
-    console.log(sellerAuthInfo)
     const { isAuthenticated, sellerAuth, isSeller } = bindActionCreators(actionCreators, dispatch)
 
 

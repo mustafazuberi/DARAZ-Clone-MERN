@@ -665,6 +665,43 @@ app.get('/getMessages/:roomId', (req, res) => {
 
 
 
+
+
+app.post('/comment', (req, res) => {
+    const commentObj = {
+        commentText: req.body.commentText, commentedBy: req.body.commentedBy, commentedbyUserName: req.body.commentedbyUserName
+    }
+    productModel.findOneAndUpdate({ _id: req.body.productId }, {
+        $push: {
+            comments: { item: commentObj }
+        }
+    }, (err, result) => {
+        if (!err) {
+            res.send({ result, message: "Comment Successfully Added!" })
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+app.get('/getComments/:productId', (req, res) => {
+    productModel.findOne({ _id: req.params.productId }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
 app.get('/', (req, res) => {
     res.send('this is / page')
 })

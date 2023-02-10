@@ -28,6 +28,7 @@ import { Button } from 'antd';
 import { Drawer, Space } from 'antd';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Input } from 'antd';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const baseUrl = "http://localhost:4000"
 const Index = () => {
@@ -45,6 +46,7 @@ const Index = () => {
 
 
     const productId = useParams().id
+    const [comments, setComments] = useState([])
     const [productDetail, setProductDetail] = useState({})
     const [storeOwner, setStoreOwner] = useState({})
     useEffect(() => {
@@ -55,8 +57,7 @@ const Index = () => {
             try {
                 const response = await axios.get(`${baseUrl}/detailPageProduct/${productId}`)
                 setProductDetail(response.data)
-                console.log(response.data)
-
+                setComments(response.data.comments)
                 // getting data of seller who is selling this product
                 const responseStore = await axios.get(`${baseUrl}/detailPageSeller/${response.data.sellerId}`)
                 setStoreOwner(responseStore.data)
@@ -127,20 +128,33 @@ const Index = () => {
 
 
 
+
+
+
+    // Showing Message screen and setting room id to get all messages
+    const [roomId, setRoomId] = useState('')
+
     const [messageScreen, setMessageScreen] = useState(false)
     const [sellerToMessage, setSellerToMessage] = useState({})
     const showMessageScreen = async (item) => {
         setMessageScreen(true)
         setSellerToMessage(item)
-        const response = await axios.get(`${baseUrl}/getMessages/${authInfo._id + productDetail.sellerId}`)
-        setAllMessages(response.data.messages)
 
-        setRoomId(authInfo._id + productDetail.sellerId)
+        setRoomId(authInfo._id + item.sellerId)
+        const response = await axios.get(`${baseUrl}/getMessages/${authInfo._id + item.sellerId}`)
+        setAllMessages(response.data.messages)
+        // console.log(authInfo._id + item.sellerId)
+        // setSended("yes")
     }
 
+
+
+    // Creating Chatroom if not available
     const createChat = async () => {
+        console.log(authInfo._id + storeOwner._id)
         allChats.forEach((item) => {
             if (item._id === authInfo._id + storeOwner._id) {
+                setOpen(true)
                 return
             }
         })
@@ -152,10 +166,18 @@ const Index = () => {
             sellerImageUrl: storeOwner.shopImageUrl,
             messages: []
         })
-        console.log(response)
+        const response2 = await axios.get(`${baseUrl}/getChats`)
+        const mychats = response2.data.filter(item => item.userId === authInfo._id)
+        setAllChats(mychats)
         setOpen(true)
     }
 
+
+
+
+
+
+    // Drawer
     const [open, setOpen] = useState(false);
     const [placement, setPlacement] = useState('right');
     const showDrawer = () => {
@@ -170,35 +192,65 @@ const Index = () => {
     };
 
 
+
+
+
+
+
+    // send Message Function
     const [allMessages, setAllMessages] = useState([])
-    const [sended, setSended] = useState('')
     const [messageText, setMessageText] = useState('')
     const sendMessage = async () => {
         const response = await axios.post(`${baseUrl}/sendMessage`, {
             text: messageText,
-            chatRoomId: authInfo._id + storeOwner._id,
+            chatRoomId: roomId,
             sendBy: authInfo._id,
-            sendTo: storeOwner._id
+            sendTo: sellerToMessage.sellerId
         })
         setMessageText('')
+        const response2 = await axios.get(`${baseUrl}/getMessages/${roomId}`)
+        setAllMessages(response2.data.messages)
 
         // for running useEffect again to get messages
-        setSended("yess")
     }
-    console.log(allMessages)
 
 
-    const [roomId, setRoomId] = useState('')
+
+
+
+
+
+
+
+    const [commentText, setCommentText] = useState('')
+    const comment = async () => {
+        if (commentText === '') {
+            return
+        }
+        const response = await axios.post(`${baseUrl}/comment`, {
+            commentText: commentText,
+            commentedBy: authInfo._id,
+            commentedbyUserName: authInfo.fullName,
+            productId: productDetail._id
+        })
+        console.log(response)
+        setCommentText('')
+
+        const response2 = await axios.get(`${baseUrl}/getComments/${productDetail._id}`)
+        setComments(response2.data.comments)
+    }
+
+
     useEffect(() => {
-        const getMessages = async () => {
-            const response = await axios.get(`${baseUrl}/getMessages/${roomId}`)
-            console.log(response)
-            setAllMessages(response.data.messages)
+        const getComments = async () => {
+            const response = await axios.get(`${baseUrl}/getComments/${productDetail._id}`)
+            setComments(response.data.comments)
         }
-        if (roomId !== '') {
-            getMessages()
-        }
-    }, [roomId, sended])
+        // getComments()
+    }, [])
+
+    console.log(comments)
+
 
 
 
@@ -259,26 +311,35 @@ const Index = () => {
 
 
 
-                <h6 className='mt-5' style={{ paddingLeft: "60px" }}>Ratings & Reviews of {productDetail.productName}</h6>
-                <div className="reviewSec">
-                    <div className="reviews">
-                        <h1>No reviews Yet</h1>
-                    </div>
-                </div>
 
                 <h6 className='mt-5' style={{ paddingLeft: "60px" }}>Comments</h6>
                 <div className="commentSec">
-                    <div className="comments">
-                        <h1>No Comments Yet</h1>
+                    <div className="comments my-5">
+                        {
+                            comment !== [] ?
+                                comments.map((item, index) => {
+                                    return <div key={index} className='commentBox'>
+                                        <div className="commentName"><AccountCircleIcon className='mx-2 mt-1' style={{ color: "#da4e08" }} />{item.item.commentedbyUserName}:  </div>
+                                        <div className="commentText">{item.item.commentText}</div>
+
+                                    </div>
+                                }) : <h1>No Comments Yet</h1>
+                        }
                     </div>
 
-                    <div className="inpComm">
-                        <div style={{ width: "95%" }}><TextField id="standard-basic" label="Leave a comment" style={{ width: "100%" }} variant="standard" /></div>
-                        <div className='mx-2'><SendIcon style={{ color: "#f85606", cursor: "pointer", position: "relative", marginTop: "20px " }} /></div>
+                    <div className="inpComm my-5">
+                        <div style={{ width: "95%" }}><TextField value={commentText} id="standard-basic" onChange={(e) => setCommentText(e.target.value)} label="Leave a comment" style={{ width: "100%" }} variant="standard" /></div>
+                        <div className='mx-2'><SendIcon onClick={comment} style={{ color: "#f85606", cursor: "pointer", position: "relative", marginTop: "20px " }} /></div>
                     </div>
                 </div>
 
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
+
+
+
 
 
 

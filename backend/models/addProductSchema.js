@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
     _id: { type: String },
-    sellerId: { type: String ,required: true},
+    sellerId: { type: String, required: true },
     productName: { type: String },
     productCategory: { type: String, required: true },
     productDescription: { type: String, required: true },
@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema({
     productShippingCost: { type: String, required: true },
     productImage: { type: String, required: true },
     createdOn: { type: Date, default: Date.now },
+    comments: { type: Array }
 });
 const productModel = mongoose.model('Products', productSchema);
 

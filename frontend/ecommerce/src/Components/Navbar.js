@@ -93,15 +93,6 @@ const Navbar = () => {
         {
             key: '3',
             label: (
-                <a style={{ textDecoration: "none" }} >
-                    <ReviewsIcon style={{ color: "grey" }} /> My Reviews
-                </a>
-            ),
-        },
-
-        {
-            key: '5',
-            label: (
                 <a style={{ textDecoration: "none" }} onClick={logout}>
                     <LogoutIcon style={{ color: "grey" }} /> Logout
                 </a>
@@ -119,7 +110,7 @@ const Navbar = () => {
             <div className="sec1">
 
 
-                
+
 
 
 
