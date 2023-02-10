@@ -134,6 +134,8 @@ const Index = () => {
         setSellerToMessage(item)
         const response = await axios.get(`${baseUrl}/getMessages/${authInfo._id + productDetail.sellerId}`)
         setAllMessages(response.data.messages)
+
+        setRoomId(authInfo._id + productDetail.sellerId)
     }
 
     const createChat = async () => {
@@ -169,6 +171,7 @@ const Index = () => {
 
 
     const [allMessages, setAllMessages] = useState([])
+    const [sended, setSended] = useState('')
     const [messageText, setMessageText] = useState('')
     const sendMessage = async () => {
         const response = await axios.post(`${baseUrl}/sendMessage`, {
@@ -178,10 +181,25 @@ const Index = () => {
             sendTo: storeOwner._id
         })
         setMessageText('')
-        setAllMessages(response.data.result.messages)
-    }
 
+        // for running useEffect again to get messages
+        setSended("yess")
+    }
     console.log(allMessages)
+
+
+    const [roomId, setRoomId] = useState('')
+    useEffect(() => {
+        const getMessages = async () => {
+            const response = await axios.get(`${baseUrl}/getMessages/${roomId}`)
+            console.log(response)
+            setAllMessages(response.data.messages)
+        }
+        if (roomId !== '') {
+            getMessages()
+        }
+    }, [roomId, sended])
+
 
 
 
@@ -315,10 +333,10 @@ const Index = () => {
                             <div className="msgScrenHeader">
                                 <KeyboardBackspaceIcon className='mx-2 mt-2' style={{ cursor: "pointer" }} onClick={() => setMessageScreen(false)} />
                                 <div className="profile">
-                                    <img src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=" alt="" />
+                                    <img src={sellerToMessage.sellerImageUrl} alt="" />
                                 </div>
                                 <div className="mx-2 mt-2 sellerName">
-                                    John Doe
+                                    {sellerToMessage.sellerName}
                                 </div>
                             </div>
 
@@ -327,13 +345,12 @@ const Index = () => {
                                     allMessages ? allMessages.map((item, index) => {
                                         if (item.msgItem.sendBy === authInfo._id) {
                                             return <div key={index} className="currentUserMsg">
-                                                this is sent message
+                                                {item.msgItem.text}
                                                 <span className="time">3:28</span>
                                             </div>
                                         } else {
                                             return <div className="friendMsg">
-                                                this is received message
-                                                <span className="time">3:48</span>
+                                                {item.msgItem.text}                                                <span className="time">3:48</span>
                                             </div>
                                         }
                                     })
@@ -344,12 +361,7 @@ const Index = () => {
                             <div className="sendInpBox">
                                 <Input placeholder="Send Message Here!" value={messageText} onChange={(e) => setMessageText(e.target.value)} allowClear /><SendIcon onClick={sendMessage} className='mx-2' style={{ color: "#da4e08" }} />
                             </div>
-
-
-
                         </div>
-
-
                     </div>
 
 
