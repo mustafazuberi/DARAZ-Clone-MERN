@@ -201,7 +201,7 @@ const SellerNavbar = () => {
                 <div className="sellerHomeLinks">
                     <div onClick={() => navigate('/sellerHome')}><Person2Icon className="mx-2" style={{ color: "grey" }} /> Profile</div>
                     <div onClick={() => navigate('/sellerMyProducts')}><InventoryIcon className="mx-2" style={{ color: "grey" }} />My Products</div>
-                    <div><DashboardIcon className="mx-2" style={{ color: "grey" }} />Dashboard</div>
+                    <div onClick={() => navigate('/sellerDashboard')}><DashboardIcon className="mx-2" style={{ color: "grey" }} />Dashboard</div>
                     <div onClick={showChildrenDrawer}><MailIcon className="mx-2" style={{ color: "grey" }} />Inbox </div>
                 </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./style.css"
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
+import Swal from 'sweetalert2'
 
 import { UserOutlined } from '@ant-design/icons';
 import { Input, Button } from 'antd';
@@ -17,14 +18,21 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actionCreators from "./../../store/index"
 import swal from 'sweetalert';
+import axios from 'axios';
 
 
 
 
 
-
-
+const baseUrl = "http://localhost:4000"
 const UserCart = () => {
+
+
+
+    const authInfo = useSelector(state => state.authData)
+
+
+
 
     let [productQty, setProductQty] = useState(0)
 
@@ -36,7 +44,6 @@ const UserCart = () => {
     const [orderPhone, setOrderPhone] = useState('')
 
     const cartItems = useSelector(state => state.cartItems)
-    console.log("cartItems", cartItems)
 
 
 
@@ -44,6 +51,34 @@ const UserCart = () => {
         removeFromCart(e)
         swal("Item deleted from cart successfully!")
     }
+
+
+
+
+
+
+    const placeOrder = async () => {
+        if (orderName.length === 0 || orderPhone.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                text: "Please fill all input field to place order!.",
+            })
+            return
+        }
+        const response = await axios.post(`${baseUrl}/placeOrder`, {
+            userInfo: { ...authInfo },
+            orderObj: { ...cartItems[0], orderName, orderPhone },
+            userId: authInfo._id,
+            sellerId: cartItems[0].sellerId
+        })
+        setOrderName('')
+        setOrderPhone('')
+        swal('Order successfully placed!')
+    }
+
+
+
+
 
 
 
@@ -100,7 +135,7 @@ const UserCart = () => {
                         <h6>Subtotal (0 items)</h6>
                         <Input size="large" value={orderName} onChange={(e) => setOrderName(e.target.value)} placeholder="Enter Your Name" />
                         <Input size="large" value={orderPhone} onChange={(e) => setOrderPhone(e.target.value)} placeholder="Enter Your Phone Number" className='my-2' />
-                        <button className='proceed'>PROCEED TO CHECKOUT</button>
+                        <button className='proceed' onClick={placeOrder}>PROCEED TO CHECKOUT</button>
 
                     </div>
 

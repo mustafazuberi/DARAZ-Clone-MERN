@@ -4,6 +4,8 @@ const userModel = require('./models/userSchema')
 const sellerModel = require('./models/sellerSchema')
 const addProductModel = require('./models/addProductSchema')
 const chatModel = require('./models/chatSchema')
+const orderModel = require('./models/orderSchema')
+
 
 const jwt = require('jsonwebtoken');
 const ObjectId = require('mongodb').ObjectId;
@@ -686,6 +688,13 @@ app.post('/comment', (req, res) => {
 
 
 
+
+
+
+
+
+
+
 app.get('/getComments/:productId', (req, res) => {
     productModel.findOne({ _id: req.params.productId }, (err, result) => {
         if (!err) {
@@ -697,6 +706,82 @@ app.get('/getComments/:productId', (req, res) => {
 })
 
 
+
+
+
+
+
+
+
+app.post('/placeOrder', (req, res) => {
+    orderModel.create({
+        userInfo: req.body.userInfo,
+        orderObj: req.body.orderObj,
+        userId: req.body.userId,
+        sellerId: req.body.sellerId,
+    }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+app.get('/getOrders/:userId', (req, res) => {
+    orderModel.find({ userId: req.params.userId }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+app.get('/getOrdersOnSellerPortal/:sellerId', (req, res) => {
+    orderModel.find({ sellerId: req.params.sellerId }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+app.post('/updateStatus/:orderId', (req, res) => {
+    orderModel.findOneAndUpdate({ _id: ObjectId(req.params.orderId) }, {
+        $set: { ststus: req.body.status }
+    }, (err, result) => {
+        if (!err) {
+            res.send(result)
+        } else {
+            console.log(result)
+        }
+    })
+})
 
 
 

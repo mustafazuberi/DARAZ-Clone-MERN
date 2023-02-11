@@ -77,7 +77,7 @@ const Navbar = () => {
         {
             key: '1',
             label: (
-                <a style={{ textDecoration: "none" }}>
+                <a style={{ textDecoration: "none" }} onClick={() => navigate('/myOrders')}>
                     <DashboardIcon style={{ color: "grey" }} /> My Orders
                 </a>
             ),

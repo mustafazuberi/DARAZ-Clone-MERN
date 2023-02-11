@@ -8,8 +8,12 @@ import SellerHome from '../pages/sellerHome';
 import MyProducts from '../pages/MyProducts/MyProducts';
 import ProductDetails from '../pages/productDetails/index'
 import StoreDetails from "../pages/storeDetails/index"
-import UserWishList from  "../pages/userWishList/index"
+import UserWishList from "../pages/userWishList/index"
 import UserCart from "../pages/UserCart/index"
+import MyOrders from "../pages/MyOrders/index"
+import SellerDashboard from "../pages/SellerDashboard"
+
+
 
 import {
     createBrowserRouter,
@@ -55,11 +59,15 @@ const Router = () => {
         },
         {
             path: "/userWishList",
-            element: <UserWishList/>,
+            element: <UserWishList />,
         },
         {
             path: "/userCart",
-            element: <UserCart/>,
+            element: <UserCart />,
+        },
+        {
+            path: "/sellerDashboard",
+            element: <SellerDashboard />,
         },
     ]);
 

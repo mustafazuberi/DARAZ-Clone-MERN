@@ -4,6 +4,7 @@ import './style.css'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -97,11 +98,37 @@ const Index = () => {
     }
 
 
-
+    const cartItems = useSelector(state => state.cartItems)
+    const [available, setAvailable] = useState(false)
+    useEffect(() => {
+        cartItems.forEach(item => {
+            if (item._id === productDetail._id) {
+                setAvailable(true)
+            }
+        });
+    }, [])
     const addItemInCart = () => {
-        addToCart(productDetail)
-        swal("Item added in your cart.")
+        if (available) {
+            Swal.fire({
+                icon: 'error',
+                text: "Already available in your cart!",
+            })
+            return
+        }
+
+        if (cartItems.length !== 0 && cartItems[0].sellerId !== productDetail.sellerId) {
+            Swal.fire({
+                icon: 'error',
+                text: "Sorry, you cannot add items from more than one store to your cart.",
+            })
+            return
+        } else {
+            addToCart(productDetail)
+            swal("Item added in your cart.")
+            setAvailable(true)
+        }
     }
+
 
 
 
@@ -250,6 +277,8 @@ const Index = () => {
     }, [])
 
     console.log(comments)
+
+
 
 
 
