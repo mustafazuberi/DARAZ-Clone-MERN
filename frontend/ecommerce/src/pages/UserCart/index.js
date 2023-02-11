@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux'
 import actionCreators from "./../../store/index"
 import swal from 'sweetalert';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -26,6 +27,22 @@ import axios from 'axios';
 
 const baseUrl = "http://localhost:4000"
 const UserCart = () => {
+
+
+    const navigate = useNavigate()
+    // Protective Routing
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
 
 
 

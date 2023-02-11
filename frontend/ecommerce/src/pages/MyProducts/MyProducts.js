@@ -21,6 +21,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Card from 'antd/es/card/Card';
 import Meta from 'antd/es/card/Meta';
 import Avatar from 'antd/es/avatar/avatar';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -32,6 +33,31 @@ const baseUrl = "http://localhost:4000"
 
 const MyProducts = () => {
     const sellerAuth = useSelector(state => state.sellerAuth)
+    const navigate = useNavigate()
+
+
+
+
+
+
+    // Protective Routing
+    const isLogginedSeller = useSelector(state => state.isSeller)
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLogginedSeller) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
+
+
 
     const categoriesArray = ["Electronics", "Clothing", "Home & Garden", "Sports & Outdoors", "Toys & Games", "Health & Beauty", "Jewelry & Watches", " Automotive", "Books & Movies", "Musical Instruments"]
     const { isOpen, onOpen, onClose } = useDisclosure()

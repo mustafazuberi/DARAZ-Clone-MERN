@@ -15,12 +15,31 @@ import { TextField, FormControl, Select, MenuItem, InputLabel } from "@mui/mater
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actionCreators from "./../../store/index"
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const baseUrl = "http://localhost:4000"
 const SellerHome = () => {
+
+
+
+
+    // Protective Routing
+    const navigate = useNavigate()
+    const isLogginedSeller = useSelector(state => state.isSeller)
+    useEffect(() => {
+        if (isLogginedSeller) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
 
 
     const authInfo = useSelector(state => state.authData)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 import "./signup.css"
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
 import axios from 'axios'
 import Swal from 'sweetalert2';
-
+import { useSelector } from 'react-redux'
 
 
 
@@ -19,6 +19,19 @@ const baseUrl = "http://localhost:4000"
 
 const Signup = () => {
     const navigate = useNavigate()
+
+
+    // Protective Routing
+    const isLogginedSeller = useSelector(state => state.isSeller)
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (!isLogginedSeller && !isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
 
 
 

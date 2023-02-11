@@ -666,6 +666,25 @@ app.get('/getMessages/:roomId', (req, res) => {
 
 
 
+app.get('/getRealTimeMessages', (req, res) => {
+
+    const changeStream = chatModel.watch();
+    changeStream.on('change', (change) => {
+        chatModel.findOne({ _id: req.params.roomId }, (err, result) => {
+            if (!err) {
+                res.send(result)
+            } else {
+                console.log(err)
+            }
+        })        // update the chat interface in real-time
+    });
+
+})
+
+
+
+
+
 
 
 

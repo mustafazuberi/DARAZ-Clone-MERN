@@ -26,8 +26,31 @@ const baseUrl = "http://localhost:4000"
 const Index = () => {
 
     const navigate = useNavigate()
+
+
+
+
+
+    // Protective Routing
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
+
+
+
+
     const storeId = useParams().id
-    console.log(storeId)
 
     const [added, setAdded] = useState(0)
     const authInfo = useSelector(state => state.authData)
@@ -64,7 +87,7 @@ const Index = () => {
         getStoreDetails()
 
 
-    }, [])
+    }, [added])
 
 
 

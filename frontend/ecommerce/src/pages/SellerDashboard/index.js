@@ -19,6 +19,28 @@ const SellerDashboard = () => {
 
     const navigate = useNavigate()
 
+
+
+
+
+
+    // Protective Routing
+    const isLogginedSeller = useSelector(state => state.isSeller)
+    useEffect(() => {
+        if (isLogginedSeller) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
+
+
     const authInfo = useSelector(state => state.sellerAuth)
     const [userOrders, setuserOrders] = useState([])
 

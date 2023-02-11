@@ -36,8 +36,6 @@ const Navbar = () => {
 
     const authInfo = useSelector(state => state.authData)
     const isLoggined = useSelector(state => state.isAuthenticated)
-    console.log("auth-data ", authInfo)
-    console.log("is-authenticated ", isLoggined)
 
 
     const { authData, isAuthenticated ,} = bindActionCreators(actionCreators, dispatch)

@@ -25,6 +25,27 @@ const baseUrl = "http://localhost:4000"
 const UserWishList = () => {
 
     const navigate = useNavigate()
+
+
+
+
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
+
+
+
     const authInfo = useSelector(state => state.authData)
     const dispatch = useDispatch()
     const { authData } = bindActionCreators(actionCreators, dispatch)

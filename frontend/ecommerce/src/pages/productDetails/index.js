@@ -170,8 +170,13 @@ const Index = () => {
         setRoomId(authInfo._id + item.sellerId)
         const response = await axios.get(`${baseUrl}/getMessages/${authInfo._id + item.sellerId}`)
         setAllMessages(response.data.messages)
-        // console.log(authInfo._id + item.sellerId)
-        // setSended("yes")
+
+        // if (response.data.messages) {
+        //     const responseRealTime = await axios.get(`${baseUrl}/getRealTimeMessages/${authInfo._id + item.sellerId}`)
+        //     setAllMessages(responseRealTime.data.messages)
+        // }
+
+
     }
 
 
@@ -268,15 +273,18 @@ const Index = () => {
     }
 
 
-    useEffect(() => {
-        const getComments = async () => {
-            const response = await axios.get(`${baseUrl}/getComments/${productDetail._id}`)
-            setComments(response.data.comments)
-        }
-        // getComments()
-    }, [])
 
-    console.log(comments)
+
+    // Protective Routing
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
 
 
 
@@ -439,7 +447,7 @@ const Index = () => {
                                                 <span className="time">3:28</span>
                                             </div>
                                         } else {
-                                            return <div className="friendMsg">
+                                            return <div className="friendMsg" key={index}>
                                                 {item.msgItem.text}                                                <span className="time">3:48</span>
                                             </div>
                                         }

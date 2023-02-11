@@ -13,7 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom'
 
-
+import { useSelector } from 'react-redux';
 
 
 
@@ -22,13 +22,28 @@ const baseUrl = "http://localhost:4000"
 const Home = () => {
     const navigate = useNavigate()
 
+
+    // Protective Routing
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
     const [allProducts, setAllProducts] = useState([])
     useEffect(() => {
         window.scrollTo(0, 0);
 
         const getAllProducts = async () => {
             const response = await axios.get(`${baseUrl}/getAllProducts`)
-            console.log(response.data)
             setAllProducts(response.data)
         }
         getAllProducts()
@@ -109,7 +124,8 @@ const Home = () => {
 
 
             <br /><br />
-            <button className="loadMore">LOAD MORE</button>
+            <br /><br />
+            <br /><br />
 
             <Footer />
         </>

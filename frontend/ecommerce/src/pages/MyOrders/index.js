@@ -23,6 +23,24 @@ const MyOrders = () => {
     const [userOrders, setuserOrders] = useState([])
 
 
+
+
+    // Protective Routing
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (isLoggined) {
+            return
+        } else {
+            navigate('/login')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
+
+
     useEffect(() => {
         const getMyOrders = async () => {
             const response = await axios.get(`${baseUrl}/getOrders/${authInfo._id}`)
@@ -31,7 +49,6 @@ const MyOrders = () => {
         getMyOrders()
     }, [])
 
-    console.log(userOrders)
 
 
     const [value, setValue] = useState('one');

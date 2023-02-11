@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 import "./login.css"
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actionCreators from "./../../store/index"
-
+import { useSelector } from 'react-redux'
 
 
 
@@ -24,6 +24,26 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { authData, isAuthenticated, sellerAuth, isSeller } = bindActionCreators(actionCreators, dispatch)
+
+
+
+
+
+    // Protective Routing
+    const isLogginedSeller = useSelector(state => state.isSeller)
+    const isLoggined = useSelector(state => state.isAuthenticated)
+    useEffect(() => {
+        if (!isLogginedSeller && !isLoggined) {
+            return
+        } else {
+            navigate('/')
+        }
+    }, [])
+    ///////////////////////////////
+
+
+
+
 
 
     const login = async (e) => {
