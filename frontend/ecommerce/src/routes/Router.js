@@ -69,6 +69,10 @@ const Router = () => {
             path: "/sellerDashboard",
             element: <SellerDashboard />,
         },
+        {
+            path: "/myOrders",
+            element: <MyOrders />,
+        },
     ]);
 
 

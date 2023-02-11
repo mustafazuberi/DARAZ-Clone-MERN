@@ -50,10 +50,10 @@ const Index = () => {
             console.log(response.data)
             setStoreData(response.data)
             setStoreFollowers(response.data.followers)
-            
+
             console.log("isFollowing", isFollowing)
-            response.data.followers.forEach((item)=>{
-                if(item.cutomerId === authInfo._id){
+            response.data.followers.forEach((item) => {
+                if (item.cutomerId === authInfo._id) {
                     setIsFollowing(true)
                 }
             })
@@ -83,7 +83,7 @@ const Index = () => {
 
 
 
-
+    console.log(storeData.shopImageUrl)
     return (
         <>
             <Navbar />
@@ -94,7 +94,7 @@ const Index = () => {
                         <GroupIcon style={{ fontSize: "35px" }} className='mainFollowerDivIcon' />
                     </div>
                     <div className="qtyFollowers">
-                        {storeFollowers.length - 1} followers
+                        {storeFollowers ? storeFollowers.length : 0} followers
                     </div>
                     <div className="chatNow">
                         <ChatBubbleIcon className='mainFollowerDivIcon' /> <br /> Chat now

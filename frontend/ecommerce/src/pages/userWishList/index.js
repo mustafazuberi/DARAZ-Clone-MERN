@@ -65,7 +65,7 @@ const UserWishList = () => {
             <div className="wishListAndFollowedStores">
                 <ChakraProvider>
                     {
-                        authInfo.wishlist.length !==0 ? authInfo.wishlist.map((item, index) => {
+                        authInfo.wishlist ? authInfo.wishlist.map((item, index) => {
                             return <div key={index} className="WishItem" >
                                 <Card
                                     direction={{ base: 'column', sm: 'row' }}

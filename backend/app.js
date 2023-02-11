@@ -321,7 +321,7 @@ app.post('/signupAsSeller', (req, res) => {
                         (err, result) => {
                             if (!err) {
                                 // console.log("data saved: ", result);
-                                res.status(201).send({ message: "Resturant Registered Successfully" });
+                                res.status(201).send({ message: "Store Created Successfully" });
                             } else {
                                 // console.log("db error: ", err);
                                 res.status(500).send({ message: "internal server error" });

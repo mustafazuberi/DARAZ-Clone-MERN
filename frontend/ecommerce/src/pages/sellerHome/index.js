@@ -22,6 +22,22 @@ import actionCreators from "./../../store/index"
 const baseUrl = "http://localhost:4000"
 const SellerHome = () => {
 
+
+    const authInfo = useSelector(state => state.authData)
+    const [userOrders, setuserOrders] = useState([])
+    useEffect(() => {
+        const getMyOrders = async () => {
+            const response = await axios.get(`${baseUrl}/getOrders/${authInfo._id}`)
+            setuserOrders(response.data)
+        }
+        getMyOrders()
+    }, [])
+
+
+
+
+
+
     const dispatch = useDispatch()
     const { sellerAuth } = bindActionCreators(actionCreators, dispatch)
 
@@ -123,6 +139,15 @@ const SellerHome = () => {
     }
 
 
+    const [userOrdersQty, setuserOrdersQty] = useState([])
+    useEffect(() => {
+        const getMyOrders = async () => {
+            const response = await axios.get(`${baseUrl}/getOrdersOnSellerPortal/${sellerAuthInfo._id}`)
+            setuserOrdersQty(response.data)
+        }
+        getMyOrders()
+    }, [])
+
 
 
 
@@ -134,7 +159,7 @@ const SellerHome = () => {
 
                 <div className="overviewDiv orders">
                     <div className="content">
-                        <h4>0</h4>
+                        <h4>{userOrdersQty.length}</h4>
                         <span>Orders</span>
 
                     </div>

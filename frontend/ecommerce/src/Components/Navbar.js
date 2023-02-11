@@ -40,7 +40,7 @@ const Navbar = () => {
     console.log("is-authenticated ", isLoggined)
 
 
-    const { authData, isAuthenticated } = bindActionCreators(actionCreators, dispatch)
+    const { authData, isAuthenticated ,} = bindActionCreators(actionCreators, dispatch)
 
 
 
