@@ -15,7 +15,8 @@ import { useSelector } from 'react-redux'
 
 
 
-const baseUrl = "http://localhost:4000"
+// const baseUrl = "http://localhost:4000"
+const baseUrl = "https://odd-rose-snapper-tie.cyclic.app/"
 
 const Signup = () => {
     const navigate = useNavigate()

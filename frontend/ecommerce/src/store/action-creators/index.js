@@ -25,7 +25,7 @@ export const isAuthenticated = (isLoggined) => {
 export const isSeller = (isSeller) => {
     return (dispatch) => {
         dispatch({
-            type: 'isSeller',
+            type: 'isThisSeller',
             payLoad: isSeller
         })
     }

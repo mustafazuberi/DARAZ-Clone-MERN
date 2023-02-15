@@ -1,7 +1,7 @@
 const isSeller = false
 
 const reducers = (state = isSeller, action) => {
-    if (action.type === 'isSeller') {
+    if (action.type === 'isThisSeller') {
         return action.payLoad
     }
     else {

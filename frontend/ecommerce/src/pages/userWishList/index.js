@@ -20,7 +20,8 @@ import axios from 'axios'
 
 
 
-const baseUrl = "http://localhost:4000"
+// const baseUrl = "http://localhost:4000"
+const baseUrl = "https://odd-rose-snapper-tie.cyclic.app/"
 
 const UserWishList = () => {
 

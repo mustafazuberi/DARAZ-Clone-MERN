@@ -31,7 +31,12 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Input } from 'antd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const baseUrl = "http://localhost:4000"
+
+
+
+// const baseUrl = "http://localhost:4000"
+const baseUrl = "https://odd-rose-snapper-tie.cyclic.app/"
+
 const Index = () => {
 
     const navigate = useNavigate()

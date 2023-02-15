@@ -7,6 +7,12 @@ const chatModel = require('./models/chatSchema')
 const orderModel = require('./models/orderSchema')
 
 
+
+const PORT = process.env.PORT ||  4000
+
+
+
+
 const jwt = require('jsonwebtoken');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -36,7 +42,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use(bodyParser.json());
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://daraz-clone-mr-zuberi.netlify.app',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
@@ -846,7 +852,7 @@ app.get('/', (req, res) => {
 
 
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
     console.log("server is running on http://localhost:4000")
 })
 

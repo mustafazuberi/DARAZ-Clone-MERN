@@ -14,7 +14,9 @@ import { useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
 
 
-const baseUrl = "http://localhost:4000"
+// const baseUrl = "http://localhost:4000"
+const baseUrl = "https://odd-rose-snapper-tie.cyclic.app/"
+
 const SellerDashboard = () => {
 
     const navigate = useNavigate()

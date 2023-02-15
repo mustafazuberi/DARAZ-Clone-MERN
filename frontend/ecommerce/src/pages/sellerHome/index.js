@@ -20,7 +20,9 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const baseUrl = "http://localhost:4000"
+// const baseUrl = "http://localhost:4000"
+const baseUrl = "https://odd-rose-snapper-tie.cyclic.app/"
+
 const SellerHome = () => {
 
 
