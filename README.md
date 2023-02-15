@@ -4,4 +4,4 @@ Daraz Clone is a powerful e-commerce platform that enables users to create their
 
 Project Video URL : https://www.linkedin.com/feed/update/urn:li:activity:7031321133127806976/
 
-Live Project Url : https://daraz-clone-mr-zuberi.netlify.app/shops.
+Live Project Url : https://daraz-clone-mr-zuberi.netlify.app/
